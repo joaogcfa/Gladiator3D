@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         float mouse_dY = Input.GetAxis("Mouse Y");
 
         //Tratando a rotação da câmera
-        cameraRotation += mouse_dY;
+        cameraRotation += -mouse_dY*4;
         cameraRotation = Mathf.Clamp(cameraRotation, -75.0f, 75.0f);
 
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = transform.right * x + transform.up * y + transform.forward * z;
 
         characterController.Move(direction * _baseSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up, mouse_dX);
+        transform.Rotate(Vector3.up, mouse_dX*4);
 
     }
 
