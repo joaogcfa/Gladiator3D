@@ -9,11 +9,13 @@ public class EnemyController : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
 
+    public int EnemyHealth = 100;
+
     // Start is called before the first frame update
     void Start()
     {
         target = PlayerManager.instance.player.transform;
-        agent = GetComponent<NavMeshAgent>();   
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -21,13 +23,18 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if(distance <= lookRadius) 
+        if (distance <= lookRadius)
         {
             agent.SetDestination(target.position);
         }
+
+        if (EnemyHealth < 0)
+        {
+            print("MORREU CARAIO");
+        }
     }
 
-    void OnDrawGizmosSelected() 
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);

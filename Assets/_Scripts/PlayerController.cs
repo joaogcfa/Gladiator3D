@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     float _baseSpeed = 10.0f;
     float _gravidade = 9.8f;
 
+    public int playerHealth = 100;
+
     CharacterController characterController;
 
     //Referência usada para a câmera filha do jogador
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
         float mouse_dY = Input.GetAxis("Mouse Y");
 
         //Tratando a rotação da câmera
-        cameraRotation += -mouse_dY*4;
+        cameraRotation += -mouse_dY * 4;
         cameraRotation = Mathf.Clamp(cameraRotation, -75.0f, 75.0f);
 
 
@@ -49,14 +51,18 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = transform.right * x + transform.up * y + transform.forward * z;
 
         characterController.Move(direction * _baseSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up, mouse_dX*4);
+        transform.Rotate(Vector3.up, mouse_dX * 4);
+
+        if (playerHealth < 0)
+        {
+            print("Morri");
+        }
 
     }
 
     void LateUpdate()
 
     {
-        RaycastHit hit;
         Debug.DrawRay(playerCamera.transform.position, transform.forward * 10.0f, Color.magenta);
         // if (Physics.Raycast(playerCamera.transform.position, transform.forward, out hit, 100.0f))
         // {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -141,7 +141,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289784311}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.06255026, y: 0.73563075, z: 0.0456302}
@@ -186,10 +186,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 289784311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74e56ac2250b57478b1f39ce6344e97, type: 3}
+  m_Script: {fileID: 11500000, guid: d034aaaaf2dc341e9aaa47edfeae5ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  EnemyHealth: 0
+--- !u!54 &289784317
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289784311}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &482467505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,7 +537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7883749328917080035, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
       propertyPath: m_TagString
-      value: Weapon
+      value: Axe
       objectReference: {fileID: 0}
     - target: {fileID: -7861831855079945968, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -763,6 +779,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 6.93666
       objectReference: {fileID: 0}
+    - target: {fileID: -417878991522404143, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: -415919170949790895, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 37.61308
@@ -806,6 +826,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 943223448204509391, guid: 6f17b9a2e38374ae19ea9f5d660fc1b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1096,10 +1120,9 @@ GameObject:
   - component: {fileID: 805381476}
   - component: {fileID: 805381479}
   - component: {fileID: 805381478}
-  - component: {fileID: 805381477}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1118,20 +1141,6 @@ Transform:
   m_Father: {fileID: 987898329}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &805381477
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805381475}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &805381478
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1329,6 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ac59c17341d4b56a04612f47c54dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 100
 --- !u!1 &1099887362 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 69f7503cd144d422f8fa96e50f938f05, type: 3}
@@ -1404,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4334314812708720168, guid: edccbf15fadd9704cb7a2020a492b120, type: 3}
       propertyPath: m_TagString
-      value: Weapon
+      value: Sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edccbf15fadd9704cb7a2020a492b120, type: 3}
@@ -1421,25 +1431,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248777025}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.425251
+  m_Radius: 0.16357803
   m_Height: 2.3454833
   m_Direction: 1
-  m_Center: {x: 4.3432557e-16, y: -0.13454843, z: 0.059799373}
---- !u!114 &1248777028
-MonoBehaviour:
+  m_Center: {x: 3.2866665e-17, y: -0.13454843, z: 0.0005838275}
+--- !u!54 &1248777028
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248777025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74e56ac2250b57478b1f39ce6344e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1521766079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1524,6 +1537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  EnemyHealth: 100
 --- !u!54 &1521766084
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1582,6 +1596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  EnemyHealth: 100
 --- !u!54 &1653484707
 Rigidbody:
   m_ObjectHideFlags: 0
