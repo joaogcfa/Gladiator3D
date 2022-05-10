@@ -30,22 +30,19 @@ public class SwordAnim : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 
-                if (!animator.GetBool("Attack"))
+                if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
                 {
                     animator.SetBool("Attack", true);
-                    // int i = Random.Range(1, 4);
-                    // if (i == 1)
-                    // {
-                    //     animator.SetBool("isBoxing", true);
-                    // }
-                    // else if (i == 2)
-                    // {
-                    //     animator.SetBool("isElbow", true);
-                    // }
-                    // else if (i == 3)
-                    // {
-                    //     animator.SetBool("isJab", true);
-                    // }
+                   
+                }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+
+                if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
+                {
+                    animator.SetBool("Defense", true);
+                   
                 }
             }
 
@@ -53,7 +50,7 @@ public class SwordAnim : MonoBehaviour
         else
         {
             animator.SetBool("Attack", false);
-
+            animator.SetBool("Defense", false);
         }
 
     }

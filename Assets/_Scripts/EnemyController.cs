@@ -28,9 +28,10 @@ public class EnemyController : MonoBehaviour
             agent.SetDestination(target.position);
         }
 
-        if (EnemyHealth < 0)
+        if (EnemyHealth <= 0)
         {
             print("MORREU CARAIO");
+            Destroy(gameObject);
         }
     }
 

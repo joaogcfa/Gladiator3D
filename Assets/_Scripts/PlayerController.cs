@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     //Utilizada para poder travar a rotação no angulo que quisermos.
     float cameraRotation;
 
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -53,12 +54,13 @@ public class PlayerController : MonoBehaviour
         characterController.Move(direction * _baseSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, mouse_dX * 4);
 
-        if (playerHealth < 0)
+        if (playerHealth <= 0)
         {
             print("Morri");
         }
 
     }
+
 
     void LateUpdate()
 
