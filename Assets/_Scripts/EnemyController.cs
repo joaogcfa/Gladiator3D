@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public float lookRadius = 10f;
     Transform target;
     NavMeshAgent agent;
+    private Animator animator;
 
     public int EnemyHealth = 100;
 
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,8 +35,43 @@ public class EnemyController : MonoBehaviour
             print("MORREU CARAIO");
             Destroy(gameObject);
         }
+
+        // HandleAnimation();
+
     }
 
+    private void HandleAnimation()
+    {
+
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+        {
+            if (Vector3.Distance(target.position, transform.position) <= lookRadius)
+            {
+
+                if (!animator.GetBool("Attack") && !animator.GetBool("Impact"))
+                {
+                    animator.SetBool("Attack", true);
+
+                }
+            }
+            // if (GameObject.Find("LongSword").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Defense"))
+            // {
+
+            //     if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
+            //     {
+            //         animator.SetBool("Defense", true);
+
+            //     }
+            // }
+
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
+            // animator.SetBool("Impact", false);
+        }
+
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
