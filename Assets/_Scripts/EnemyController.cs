@@ -36,13 +36,13 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // HandleAnimation();
+        HandleAnimation();
 
     }
 
     private void HandleAnimation()
     {
-
+        // Idle -> Attack
         if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
             if (Vector3.Distance(target.position, transform.position) <= lookRadius)
@@ -51,25 +51,22 @@ public class EnemyController : MonoBehaviour
                 if (!animator.GetBool("Attack") && !animator.GetBool("Impact"))
                 {
                     animator.SetBool("Attack", true);
-
+                    animator.SetBool("Idle", false);
                 }
             }
-            // if (GameObject.Find("LongSword").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Defense"))
-            // {
-
-            //     if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
-            //     {
-            //         animator.SetBool("Defense", true);
-
-            //     }
-            // }
-
         }
-        else
-        {
-            animator.SetBool("Attack", false);
-            // animator.SetBool("Impact", false);
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+            if (Vector3.Distance(target.position, transform.position) > lookRadius)
+            {
+
+                if (!animator.GetBool("Idle") && !animator.GetBool("Impact"))
+                {
+                    animator.SetBool("Idle", true);
+                    animator.SetBool("Attack", false);
+                }
+            }
         }
+        
 
     }
     void OnDrawGizmosSelected()
