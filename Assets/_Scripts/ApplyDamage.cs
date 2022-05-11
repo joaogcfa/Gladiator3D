@@ -18,6 +18,17 @@ public class ApplyDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.tag == "Axe")
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Impact"))
+            {
+                if (!animator.GetBool("Idle") && !animator.GetBool("Attack"))
+                {
+                    animator.SetBool("Attack", true);
+                    animator.SetBool("Impact", false);
+                }
+            }
+        }
 
     }
     private bool hasCollide = false;
@@ -46,7 +57,7 @@ public class ApplyDamage : MonoBehaviour
         {
             if (col.tag == "Player")
             {
-                if (hasCollide == false)
+                if (hasCollide == false && !GameObject.Find("LongSword").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Defense"))
                 {
                     print(col.transform.parent.gameObject.transform.Find("HealthCanvas/Background/Foreground"));
                     // healthbar.sizeDelta = new Vector2()
@@ -61,7 +72,7 @@ public class ApplyDamage : MonoBehaviour
             if (col.tag == "Sword")
             {
                 print("BATEU NA ESPADA");
-                // HandleAnimation();
+                HandleAnimation();
             }
         }
 
@@ -71,17 +82,16 @@ public class ApplyDamage : MonoBehaviour
     {
         if (GameObject.Find("LongSword").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Defense"))
         {
-
-            if (!animator.GetBool("Attack") && !animator.GetBool("Impact"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
-                animator.SetBool("Impact", true);
+                if (!animator.GetBool("Idle") && !animator.GetBool("Impact"))
+                {
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Impact", true);
+                }
             }
 
-        }
-        else
-        {
-            // animator.SetBool("Attack", false);
-            animator.SetBool("Impact", false);
+
         }
 
     }

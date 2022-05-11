@@ -55,7 +55,8 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
             if (Vector3.Distance(target.position, transform.position) > lookRadius)
             {
 
@@ -66,7 +67,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        
+
 
     }
     void OnDrawGizmosSelected()
