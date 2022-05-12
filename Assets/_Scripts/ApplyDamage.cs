@@ -7,12 +7,15 @@ public class ApplyDamage : MonoBehaviour
     public Animator animator;
     public RectTransform healthbar;
     public int EnemyHealth;
+    public AudioSource audioGrunt;
+    public AudioSource audioClash;
 
     void Start()
     {
         // EnemyHealth = GameObject.Find("brute").GetComponent<EnemyController>().EnemyHealth;
         animator = transform.root.GetComponent<Animator>();
-        print(transform.root);
+        // print(transform.root);
+        // audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,11 +47,12 @@ public class ApplyDamage : MonoBehaviour
                 {
                     print(col.transform.parent.gameObject.transform.Find("HealthCanvas/Background/Foreground"));
                     // healthbar.sizeDelta = new Vector2()
-
+                    
                     col.transform.parent.gameObject.GetComponent<EnemyController>().EnemyHealth -= 25;
                     col.transform.parent.gameObject.transform.Find("HealthCanvas/Background/Foreground").GetComponent<RectTransform>().sizeDelta = new Vector2(col.transform.parent.gameObject.GetComponent<EnemyController>().EnemyHealth, healthbar.sizeDelta.y);
                     // healthbar.sizeDelta = new Vector2(col.gameObject.GetComponent<EnemyController>().EnemyHealth)
                     hasCollide = true;
+                    audioGrunt.Play(0);
                     StartCoroutine(TakeHealth());
                 }
             }
@@ -66,6 +70,7 @@ public class ApplyDamage : MonoBehaviour
                     col.transform.parent.gameObject.transform.Find("HealthCanvas/Background/Foreground").GetComponent<RectTransform>().sizeDelta = new Vector2(col.transform.parent.gameObject.GetComponent<PlayerController>().playerHealth, healthbar.sizeDelta.y);
                     // healthbar.sizeDelta = new Vector2(col.gameObject.GetComponent<EnemyController>().EnemyHealth)
                     hasCollide = true;
+                    audioGrunt.Play(0);
                     StartCoroutine(TakeHealth());
                 }
             }
@@ -86,6 +91,7 @@ public class ApplyDamage : MonoBehaviour
             {
                 if (!animator.GetBool("Idle") && !animator.GetBool("Impact"))
                 {
+                    audioClash.Play();
                     animator.SetBool("Attack", false);
                     animator.SetBool("Impact", true);
                 }

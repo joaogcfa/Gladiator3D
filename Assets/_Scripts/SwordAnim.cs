@@ -6,6 +6,7 @@ public class SwordAnim : MonoBehaviour
 {
 
     private Animator animator;
+    public AudioSource audioSword;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,7 @@ public class SwordAnim : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-
+                audioSword.Play();
                 if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
                 {
                     animator.SetBool("Attack", true);
@@ -38,7 +39,7 @@ public class SwordAnim : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(1))
             {
-
+                audioSword.Play();
                 if (!animator.GetBool("Attack") && !animator.GetBool("Defense"))
                 {
                     animator.SetBool("Defense", true);

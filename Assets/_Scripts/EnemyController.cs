@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class EnemyController : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     private Animator animator;
+    public AudioSource audioSource;
 
     public int EnemyHealth = 100;
 
@@ -18,6 +21,7 @@ public class EnemyController : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,7 +36,7 @@ public class EnemyController : MonoBehaviour
 
         if (EnemyHealth <= 0)
         {
-            print("MORREU CARAIO");
+            SceneManager.LoadScene(0);
             Destroy(gameObject);
         }
 
