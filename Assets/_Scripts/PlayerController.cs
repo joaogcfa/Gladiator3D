@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     //Utilizada para poder travar a rotação no angulo que quisermos.
     float cameraRotation;
 
+    public GameObject pausePanel;
+
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
         playerCamera = GameObject.Find("Main Camera");
         cameraRotation = 0.0f;
+
     }
 
     void Update()
@@ -47,12 +50,15 @@ public class PlayerController : MonoBehaviour
         cameraRotation = Mathf.Clamp(cameraRotation, -75.0f, 75.0f);
 
 
-        playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation, 0.0f, 0.0f);
 
         Vector3 direction = transform.right * x + transform.up * y + transform.forward * z;
 
         characterController.Move(direction * _baseSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up, mouse_dX * 4);
+
+        if(!pausePanel.activeSelf){
+            playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation, 0.0f, 0.0f);
+            transform.Rotate(Vector3.up, mouse_dX * 4);
+        }
 
         if (playerHealth <= 0)
         {
