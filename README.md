@@ -1,4 +1,4 @@
-Gladiator
+# Gladiator
 
 Gladiator is a fast-paced arena combat game where you face waves of enemies in brutal melee battles. Survive as long as you can, earn points, and prove yourself in the coliseum.
 Features
